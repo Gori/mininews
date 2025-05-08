@@ -143,7 +143,6 @@ export default function ContactsList({ contacts, newsletterId }: ContactsListPro
           className="pl-10"
         />
       </div>
-      
       {error && (
         <Alert variant="destructive" className="mb-4">
           <AlertCircle className="h-4 w-4" />
@@ -151,7 +150,6 @@ export default function ContactsList({ contacts, newsletterId }: ContactsListPro
           <AlertDescription>{error}</AlertDescription>
         </Alert>
       )}
-      
       {filteredContacts.length === 0 ? (
         <Alert variant="default" className="mt-4 text-center">
           <Search className="h-5 w-5 mx-auto mb-2" /> 
@@ -228,7 +226,7 @@ export default function ContactsList({ contacts, newsletterId }: ContactsListPro
                     >
                       {actionLoading === contact.id && window.confirm('Are you sure you want to delete this contact? This action cannot be undone.') ? (
                         // This specific loading state for delete is tricky with confirm, simplified for now
-                        <span className="flex items-center"><Loader2 className="mr-1 h-4 w-4 animate-spin" /> Working...</span>
+                        (<span className="flex items-center"><Loader2 className="mr-1 h-4 w-4 animate-spin" />Working...</span>)
                       ) : (
                         <span className="flex items-center"><Trash2 className="mr-1 h-4 w-4"/> Delete</span>
                       )}

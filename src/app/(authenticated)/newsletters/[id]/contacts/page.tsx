@@ -99,7 +99,7 @@ export default async function ContactsPage({ params }: { params: { id: string } 
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbLink asChild><Link href={`/newsletters/${newsletter.id}`}>{newsletter.name}</Link></BreadcrumbLink>
+            <BreadcrumbLink asChild><Link href={`/newsletters/${newsletter.id}`} legacyBehavior>{newsletter.name}</Link></BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
@@ -107,14 +107,12 @@ export default async function ContactsPage({ params }: { params: { id: string } 
           </BreadcrumbItem>
         </BreadcrumbList>
       </UIBreadcrumb>
-
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2 text-foreground">Manage Contacts</h1>
         <p className="text-muted-foreground">
           View, add, and manage subscribers for {newsletter.name}
         </p>
       </div>
-      
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <div className="md:col-span-2">
           <Card className="h-full">
@@ -156,7 +154,6 @@ export default async function ContactsPage({ params }: { params: { id: string } 
           </Card>
         </div>
       </div>
-      
       <Card>
         <CardHeader>
           <CardTitle>Subscriber Statistics</CardTitle>

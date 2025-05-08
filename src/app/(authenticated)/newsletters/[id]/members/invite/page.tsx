@@ -107,7 +107,7 @@ export default async function InviteMember({ params }: { params: { id: string } 
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbLink asChild><Link href={`/newsletters/${newsletter.id}`}>{newsletter.name}</Link></BreadcrumbLink>
+            <BreadcrumbLink asChild><Link href={`/newsletters/${newsletter.id}`} legacyBehavior>{newsletter.name}</Link></BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
@@ -115,14 +115,12 @@ export default async function InviteMember({ params }: { params: { id: string } 
           </BreadcrumbItem>
         </BreadcrumbList>
       </UIBreadcrumb>
-
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2 text-foreground">Invite Team Member</h1>
         <p className="text-muted-foreground">
           Invite a team member to collaborate on "{newsletter.name}"
         </p>
       </div>
-      
       <Card>
         <CardHeader>
           <CardTitle>Invitation Details</CardTitle>

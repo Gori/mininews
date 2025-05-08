@@ -83,7 +83,10 @@ export default async function SubscriptionPage({ params }: { params: { id: strin
         <div className="flex items-center space-x-2 text-sm text-gray-500 mb-2">
           <Link href="/dashboard" className="hover:text-blue-600">Dashboard</Link>
           <span>/</span>
-          <Link href={`/newsletters/${newsletter.id}`} className="hover:text-blue-600">{newsletter.name}</Link>
+          <Link
+            href={`/newsletters/${newsletter.id}`}
+            className="hover:text-blue-600"
+            legacyBehavior>{newsletter.name}</Link>
           <span>/</span>
           <span className="text-gray-700">Subscription Page</span>
         </div>
@@ -92,7 +95,6 @@ export default async function SubscriptionPage({ params }: { params: { id: strin
           View and share your public subscription page
         </p>
       </div>
-      
       <div className="bg-white p-6 rounded-lg shadow-sm border mb-8">
         <h2 className="text-xl font-semibold mb-4">Public Signup URL</h2>
         <div className="flex items-center space-x-2 mb-4">
@@ -123,7 +125,6 @@ export default async function SubscriptionPage({ params }: { params: { id: strin
           </Link>
         </div>
       </div>
-      
       <div className="bg-white p-6 rounded-lg shadow-sm border mb-8">
         <h2 className="text-xl font-semibold mb-4">Subscriber Stats</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -143,7 +144,6 @@ export default async function SubscriptionPage({ params }: { params: { id: strin
           </div>
         </div>
       </div>
-      
       <div className="bg-white p-6 rounded-lg shadow-sm border">
         <h2 className="text-xl font-semibold mb-4">Embed Instructions</h2>
         <p className="text-gray-600 mb-4">
