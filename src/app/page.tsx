@@ -1,103 +1,84 @@
-import Image from "next/image";
+import Link from 'next/link';
+import { SignInButton } from '@clerk/nextjs';
+import { auth } from '@clerk/nextjs/server';
+import { redirect } from 'next/navigation';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 
-export default function Home() {
+export default async function Home() {
+  const { userId } = await auth();
+  
+  // If user is already logged in, redirect to dashboard
+  if (userId) {
+    redirect('/dashboard');
+  }
+  
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <main className="flex min-h-screen flex-col items-center p-8 md:p-24">
+      <div className="max-w-4xl w-full">
+        <div className="mb-12 text-center">
+          <h1 className="text-4xl font-bold mb-4">MiniNews</h1>
+          <p className="text-xl text-gray-600">
+            A minimal newsletter creation tool with Google Drive and Gmail integration.
+          </p>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+          <Card>
+            <CardHeader>
+              <CardTitle>Create Newsletters</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-gray-600">
+                Easily create and manage one or more newsletters with a clean, simple interface.
+              </p>
+            </CardContent>
+          </Card>
+          
+          <Card>
+            <CardHeader>
+              <CardTitle>Google Drive Integration</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-gray-600">
+                Use Google Docs for content creation, then send it directly as an HTML email.
+              </p>
+            </CardContent>
+          </Card>
+          
+          <Card>
+            <CardHeader>
+              <CardTitle>Manage Contacts</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-gray-600">
+                Import or add contacts manually, and track unsubscribes automatically.
+              </p>
+            </CardContent>
+          </Card>
+          
+          <Card>
+            <CardHeader>
+              <CardTitle>Schedule Sends</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-gray-600">
+                Set up automatic sends based on date-formatted filenames in your Drive folder.
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+        
+        <div className="flex justify-center">
+          <SignInButton mode="modal">
+            <button className="px-6 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition-colors flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" className="mr-2 fill-current">
+                <path d="M12.545,12.151L12.545,12.151c0,1.054,0.855,1.909,1.909,1.909h3.536c-0.447,1.722-1.997,2.996-3.846,2.996 c-2.22,0-4.001-1.781-4.001-4.001s1.781-4.001,4.001-4.001c0.995,0,1.906,0.354,2.613,0.949l0.293,0.253l1.523-1.523l-0.297-0.252 C16.792,6.201,15.372,5.6,13.817,5.6c-3.581,0-6.455,2.874-6.455,6.455s2.874,6.455,6.455,6.455c5.813,0,6.439-5.452,6.439-7.27 c0-0.59-0.048-1.134-0.122-1.63h-7.589V12.151z" />
+              </svg>
+              Sign in with Gmail
+            </button>
+          </SignInButton>
+        </div>
+      </div>
+    </main>
   );
 }
