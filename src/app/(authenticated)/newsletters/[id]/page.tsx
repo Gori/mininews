@@ -78,8 +78,24 @@ async function updateNewsletter(formData: FormData) {
   });
   
   if (!response.ok) {
-    const error = await response.json();
-    throw new Error(error.error || 'Failed to update newsletter');
+    let errorMsg = 'Failed to update newsletter.';
+    try {
+      // Try parsing JSON first
+      const errorData = await response.json();
+      errorMsg = errorData.error || errorMsg; 
+    } catch (jsonError) {
+      // If JSON parsing fails, read as text (might be HTML error page)
+      try {
+        const textError = await response.text();
+        console.error('Non-JSON error response:', textError); 
+        // You might want a more user-friendly message here in some cases
+        errorMsg = `Update failed with status ${response.status}.`;
+      } catch (textReadError) {
+        console.error('Failed to read error response body:', textReadError);
+        errorMsg = `Update failed with status ${response.status}.`;
+      }
+    }
+    throw new Error(errorMsg);
   }
   
   // Redirect to the same page to refresh data
@@ -177,9 +193,9 @@ export default async function NewsletterSettings({ params }: { params: { id: str
             
             {isOwner && (
               <CardFooter className="flex justify-end space-x-3 mt-6 p-0">
-                <Link href="/dashboard" passHref legacyBehavior>
+                <Link href="/dashboard">
                   <Button asChild variant="neutral">
-                    <a>Cancel</a>
+                    <span>Cancel</span>
                   </Button>
                 </Link>
                 <Button type="submit">
@@ -203,9 +219,9 @@ export default async function NewsletterSettings({ params }: { params: { id: str
         </CardContent>
         {isOwner && (
           <CardFooter className="flex justify-end">
-            <Link href={`/newsletters/${newsletter.id}/members/invite`} passHref legacyBehavior>
+            <Link href={`/newsletters/${newsletter.id}/members/invite`}>
               <Button asChild>
-                <a>Invite Members</a>
+                <span>Invite Members</span>
               </Button>
             </Link>
           </CardFooter>
@@ -217,56 +233,60 @@ export default async function NewsletterSettings({ params }: { params: { id: str
           <CardTitle>Manage Newsletter</CardTitle>
         </CardHeader>
         <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Link href={`/newsletters/${newsletter.id}/contacts`} passHref legacyBehavior>
-            <a className="block rounded-base focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
-              <Card className="h-full hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none transition-all cursor-pointer">
-                <CardHeader>
-                  <CardTitle className="text-lg">Contacts</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">Manage subscribers and lists</p>
-                </CardContent>
-              </Card>
-            </a>
+          <Link 
+            href={`/newsletters/${newsletter.id}/contacts`} 
+            className="block rounded-base focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          >
+            <Card className="h-full hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none transition-all cursor-pointer">
+              <CardHeader>
+                <CardTitle className="text-lg">Contacts</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">Manage subscribers and lists</p>
+              </CardContent>
+            </Card>
           </Link>
           
-          <Link href={`/newsletters/${newsletter.id}/send`} passHref legacyBehavior>
-            <a className="block rounded-base focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
-              <Card className="h-full hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none transition-all cursor-pointer">
-                <CardHeader>
-                  <CardTitle className="text-lg">Send Newsletter</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">Create and send newsletters</p>
-                </CardContent>
-              </Card>
-            </a>
+          <Link 
+            href={`/newsletters/${newsletter.id}/send`} 
+            className="block rounded-base focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          >
+            <Card className="h-full hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none transition-all cursor-pointer">
+              <CardHeader>
+                <CardTitle className="text-lg">Send Newsletter</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">Create and send newsletters</p>
+              </CardContent>
+            </Card>
           </Link>
           
-          <Link href={`/newsletters/${newsletter.id}/logs`} passHref legacyBehavior>
-            <a className="block rounded-base focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
-              <Card className="h-full hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none transition-all cursor-pointer">
-                <CardHeader>
-                  <CardTitle className="text-lg">Logs</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">View send history and analytics</p>
-                </CardContent>
-              </Card>
-            </a>
+          <Link 
+            href={`/newsletters/${newsletter.id}/logs`} 
+            className="block rounded-base focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          >
+            <Card className="h-full hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none transition-all cursor-pointer">
+              <CardHeader>
+                <CardTitle className="text-lg">Logs</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">View send history and analytics</p>
+              </CardContent>
+            </Card>
           </Link>
           
-          <Link href={`/newsletters/${newsletter.id}/subscribe`} passHref legacyBehavior>
-            <a className="block rounded-base focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
-              <Card className="h-full hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none transition-all cursor-pointer">
-                <CardHeader>
-                  <CardTitle className="text-lg">Subscription Page</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">Customize and view signup page</p>
-                </CardContent>
-              </Card>
-            </a>
+          <Link 
+            href={`/newsletters/${newsletter.id}/subscribe`} 
+            className="block rounded-base focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          >
+            <Card className="h-full hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none transition-all cursor-pointer">
+              <CardHeader>
+                <CardTitle className="text-lg">Subscription Page</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">Customize and view signup page</p>
+              </CardContent>
+            </Card>
           </Link>
         </CardContent>
       </Card>

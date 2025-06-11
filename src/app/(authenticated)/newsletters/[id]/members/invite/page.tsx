@@ -107,7 +107,7 @@ export default async function InviteMember({ params }: { params: { id: string } 
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbLink asChild><Link href={`/newsletters/${newsletter.id}`} legacyBehavior>{newsletter.name}</Link></BreadcrumbLink>
+            <BreadcrumbLink asChild><Link href={`/newsletters/${newsletter.id}`} >{newsletter.name}</Link></BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
@@ -161,7 +161,7 @@ export default async function InviteMember({ params }: { params: { id: string } 
             </div>
             
             <CardFooter className="flex justify-end space-x-3 pt-6 px-0 pb-0">
-              <Link href={`/newsletters/${newsletter.id}`} passHref legacyBehavior>
+              <Link href={`/newsletters/${newsletter.id}`} passHref >
                 <Button asChild variant="neutral">
                   <a>Cancel</a>
                 </Button>

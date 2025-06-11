@@ -103,7 +103,7 @@ export default function NewNewsletter() {
             </div>
             
             <CardFooter className="flex justify-end space-x-3 pt-6">
-              <Link href="/newsletters" passHref legacyBehavior>
+              <Link href="/newsletters" passHref >
                 <Button asChild variant="neutral">
                   <a>Cancel</a>
                 </Button>

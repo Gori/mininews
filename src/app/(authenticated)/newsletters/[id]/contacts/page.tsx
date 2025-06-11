@@ -99,7 +99,7 @@ export default async function ContactsPage({ params }: { params: { id: string } 
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbLink asChild><Link href={`/newsletters/${newsletter.id}`} legacyBehavior>{newsletter.name}</Link></BreadcrumbLink>
+            <BreadcrumbLink asChild><Link href={`/newsletters/${newsletter.id}`} >{newsletter.name}</Link></BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>

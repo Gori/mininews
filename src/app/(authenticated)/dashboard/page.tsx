@@ -75,11 +75,9 @@ export default async function Dashboard() {
         <CardHeader>
           <div className="flex justify-between items-center">
             <CardTitle>Your Newsletters</CardTitle>
-            <Link href="/newsletters/new" passHref legacyBehavior>
-              <Button asChild>
-                <a>New Newsletter</a>
-              </Button>
-            </Link>
+            <Button asChild>
+              <Link href="/newsletters/new">New Newsletter</Link>
+            </Button>
           </div>
         </CardHeader>
         <CardContent>

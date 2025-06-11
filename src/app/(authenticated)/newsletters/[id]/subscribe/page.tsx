@@ -86,7 +86,7 @@ export default async function SubscriptionPage({ params }: { params: { id: strin
           <Link
             href={`/newsletters/${newsletter.id}`}
             className="hover:text-blue-600"
-            legacyBehavior>{newsletter.name}</Link>
+            >{newsletter.name}</Link>
           <span>/</span>
           <span className="text-gray-700">Subscription Page</span>
         </div>

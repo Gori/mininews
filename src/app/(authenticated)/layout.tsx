@@ -28,8 +28,9 @@ export default function AuthenticatedLayout({
               <NavigationMenu className="border-none p-0 bg-transparent shadow-none">
                 <NavigationMenuList>
                   <NavigationMenuItem>
-                    <Link href="/dashboard" legacyBehavior passHref>
+                    <Link href="/dashboard">
                       <NavigationMenuLink 
+                        asChild
                         className={cn(
                           "group inline-flex h-10 w-max items-center justify-center rounded-base px-4 py-2 text-sm font-heading",
                           "bg-transparent text-foreground hover:bg-secondary-background focus:bg-secondary-background focus:outline-none",
@@ -41,8 +42,9 @@ export default function AuthenticatedLayout({
                     </Link>
                   </NavigationMenuItem>
                   <NavigationMenuItem>
-                    <Link href="/newsletters" legacyBehavior passHref>
+                    <Link href="/newsletters">
                       <NavigationMenuLink 
+                        asChild
                         className={cn(
                           "group inline-flex h-10 w-max items-center justify-center rounded-base px-4 py-2 text-sm font-heading",
                           "bg-transparent text-foreground hover:bg-secondary-background focus:bg-secondary-background focus:outline-none",
@@ -54,8 +56,9 @@ export default function AuthenticatedLayout({
                     </Link>
                   </NavigationMenuItem>
                   <NavigationMenuItem>
-                    <Link href="/contacts" legacyBehavior passHref>
+                    <Link href="/contacts">
                       <NavigationMenuLink 
+                        asChild
                         className={cn(
                           "group inline-flex h-10 w-max items-center justify-center rounded-base px-4 py-2 text-sm font-heading",
                           "bg-transparent text-foreground hover:bg-secondary-background focus:bg-secondary-background focus:outline-none",
@@ -67,8 +70,9 @@ export default function AuthenticatedLayout({
                     </Link>
                   </NavigationMenuItem>
                   <NavigationMenuItem>
-                    <Link href="/logs" legacyBehavior passHref>
+                    <Link href="/logs">
                       <NavigationMenuLink 
+                        asChild
                         className={cn(
                           "group inline-flex h-10 w-max items-center justify-center rounded-base px-4 py-2 text-sm font-heading",
                           "bg-transparent text-foreground hover:bg-secondary-background focus:bg-secondary-background focus:outline-none",
